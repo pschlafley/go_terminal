@@ -1,35 +1,15 @@
 package main
 
 import (
-	"strings"
-	"time"
-
+	"github.com/pschlafley/fileFunctions"
 	"github.com/pterm/pterm"
 	"github.com/pterm/pterm/putils"
 )
 
 func main() {
 	//var progressBarSteps pterm.BasicTextPrinter
-	var area pterm.AreaPrinter = pterm.DefaultArea
+	var area pterm.AreaPrinter = *pterm.DefaultArea.WithRemoveWhenDone(true)
 	var title pterm.BigTextPrinter = pterm.DefaultBigText
-
-	var pbList = strings.Split("Initializing-App "+
-		"Loading-Functions "+"Loading-Colors", " ")
-	progressBar, pbErr := pterm.DefaultProgressbar.WithTotal(len(pbList)).WithTitle("Downloading").Start()
-
-	for i := 0; i < progressBar.Total; i++ {
-		if pbErr != nil {
-			pterm.Error.Println("An error has occured")
-		}
-		if i == 6 {
-			time.Sleep(time.Second * 3)
-		}
-		progressBar.UpdateTitle("Downloading " + pbList[i])
-		pterm.Success.Println("Downloading " + pbList[i])
-		progressBar.Increment()
-		progressBar.WithRemoveWhenDone(true)
-		time.Sleep(time.Millisecond * 350)
-	}
 
 	area.Center = true
 
@@ -42,6 +22,8 @@ func main() {
 	var selectOptions []string = []string{
 		"Create a file",
 		"Edit a file",
+		"Delete a file",
+		"Find a file",
 	}
 
 	result, _ := pterm.DefaultInteractiveSelect.WithOptions(selectOptions).Show()
@@ -49,6 +31,20 @@ func main() {
 	area.Update(
 		result,
 	)
+
+	if result == "Create a file" {
+		fileName, _ := pterm.DefaultInteractiveTextInput.WithDefaultText("File Name").Show()
+		path, _ := pterm.DefaultInteractiveTextInput.WithDefaultText("Path").Show()
+
+		area.Update(fileName, path)
+		fileFunctions.CreateFile(fileName, path)
+	} else if result == "Find a file" {
+		fileName, _ := pterm.DefaultInteractiveTextInput.WithDefaultText("File Name").Show()
+		path, _ := pterm.DefaultInteractiveTextInput.WithDefaultText("Path").Show()
+
+		area.Update(fileName, path)
+		fileFunctions.FindFile(fileName, path)
+	}
 
 	area.Stop()
 }
