@@ -46,6 +46,14 @@ github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230707011956-84514c810842 h
 github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230707011956-84514c810842/go.mod h1:M9KijEEb6r9Hto5Blc3BwZHYTM/p87YIJKtXktnTvns=
 github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230707012826-70a6b767bd47 h1:ZCIwGof6ckfxRYMro4M6BWg/fK1lbI9w524q3fXTSfI=
 github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230707012826-70a6b767bd47/go.mod h1:M9KijEEb6r9Hto5Blc3BwZHYTM/p87YIJKtXktnTvns=
+github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230708153009-b302ab477647 h1:0gm0vku8uJ84KR6HGnQ3+d/8Rl4N1+v6LXGfeZdK8dQ=
+github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230708153009-b302ab477647/go.mod h1:M9KijEEb6r9Hto5Blc3BwZHYTM/p87YIJKtXktnTvns=
+github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230708184531-e9486d5bd94e h1:lV+psn30FZu+x9TN1HiMkN290S2zLfOIf6BTSWmAZPc=
+github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230708184531-e9486d5bd94e/go.mod h1:M9KijEEb6r9Hto5Blc3BwZHYTM/p87YIJKtXktnTvns=
+github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230709125648-99dab64608c8 h1:5pMWj7RSLHk8igKxBjaIqLv2LV6zhO+FqQeA9h1NskE=
+github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230709125648-99dab64608c8/go.mod h1:M9KijEEb6r9Hto5Blc3BwZHYTM/p87YIJKtXktnTvns=
+github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230712022616-614a938c794f h1:KiJu1niGNT61DUvE0I2zbBlDUVpEX7C2CjXJkim/h7k=
+github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230712022616-614a938c794f/go.mod h1:M9KijEEb6r9Hto5Blc3BwZHYTM/p87YIJKtXktnTvns=
 github.com/pterm/pterm v0.12.27/go.mod h1:PhQ89w4i95rhgE+xedAoqous6K9X+r6aSOI2eFF7DZI=
 github.com/pterm/pterm v0.12.29/go.mod h1:WI3qxgvoQFFGKGjGnJR849gU0TsEOvKn5Q8LlY1U7lg=
 github.com/pterm/pterm v0.12.30/go.mod h1:MOqLIyMOgmTDz9yorcYbcw+HsgoZo3BQfg2wtl3HEFE=
