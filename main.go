@@ -1,6 +1,9 @@
 package main
 
 import (
+	"os"
+	"time"
+
 	"github.com/pschlafley/fileFunctions"
 	"github.com/pterm/pterm"
 	"github.com/pterm/pterm/putils"
@@ -47,21 +50,49 @@ func main() {
 		path, _ := pterm.DefaultInteractiveTextInput.WithDefaultText("Path").Show()
 		fileNameText := pterm.DefaultBasicText.WithStyle(pterm.FgLightGreen.ToStyle()).Sprint(fileName)
 		pathText := pterm.DefaultBasicText.WithStyle(pterm.FgLightGreen.ToStyle()).Sprint(path)
-		confirmCreateDirectory, confirmCreateDirectoryErr := pterm.DefaultInteractiveConfirm.WithConfirmText("Yes").WithDefaultText("Would you like to create the directory and file at the given path?").WithDefaultValue(true).Show()
-
-		area.Update(pathText, fileNameText)
 		fileWasFound, fileName, path, errorArr := fileFunctions.FindFile(fileName, path)
+
+		pterm.Info.Printf("\nSearching for: %v in the path: %v\n", fileNameText, pathText)
 
 		if fileWasFound {
 			area.Update(pterm.DefaultBasicText.WithStyle(pterm.FgLightGreen.ToStyle()).Sprintf("%v was found at %v", fileName, path))
-		} else if errorArr[0] == "no such file or directory" {
-			area.Update(confirmCreateDirectory)
+		}
 
-			if confirmCreateDirectory {
+		if len(errorArr) > 0 && errorArr[0] == " no such file or directory" {
+			confirmCreateDirectory, _ := pterm.DefaultInteractiveConfirm.WithDefaultText("There was no directory found at the given path. Would you like to create the directory and file?").WithTextStyle(pterm.FgRed.ToStyle()).Show()
+
+			createDirectorySpinner, _ := pterm.DefaultSpinner.Start("Creating the directory at the given path.")
+			time.Sleep(time.Second * 2)
+			createDirectorySpinner.Success("Directory created!")
+
+			if getConfirmAnswer(confirmCreateDirectory) == "Yes" {
 				fileFunctions.CreateDirectory(path)
+			}
+
+			confirmCreateFile, _ := pterm.DefaultInteractiveConfirm.WithDefaultText("Would you also like to create the file in the directory?").WithTextStyle(pterm.FgCyan.ToStyle()).Show()
+
+			if getConfirmAnswer(confirmCreateFile) == "Yes" {
+				createFileSpinner, _ := pterm.DefaultSpinner.Start("Creating the file at the given path.")
+				time.Sleep(time.Second * 2)
+
+				createFileSpinner.Success("File created!")
+
 				fileFunctions.CreateFile(fileName, path)
-			} else if !confirmCreateDirectory {
-				area.Update(pterm.DefaultBasicText.WithStyle(pterm.FgRed.ToStyle()).Print(confirmCreateDirectoryErr))
+				os.Exit(1)
+			} else {
+				os.Exit(1)
+			}
+		}
+
+		if !fileWasFound {
+			confirmCreateFile, _ := pterm.DefaultInteractiveConfirm.WithDefaultText("The file was not found at the given path! Would you like to create it?").WithTextStyle(pterm.FgRed.ToStyle()).Show()
+
+			createFileSpinner, _ := pterm.DefaultSpinner.Start("Creating the file at the given path.")
+			time.Sleep(time.Second * 2)
+			createFileSpinner.Success("File created!")
+
+			if getConfirmAnswer(confirmCreateFile) == "Yes" {
+				fileFunctions.CreateFile(fileName, path)
 			}
 		}
 
@@ -72,4 +103,11 @@ func main() {
 	}
 
 	area.Stop()
+}
+
+func getConfirmAnswer(answer bool) string {
+	if answer {
+		return "Yes"
+	}
+	return "No"
 }
