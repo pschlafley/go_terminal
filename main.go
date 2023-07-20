@@ -27,7 +27,6 @@ func main() {
 		"Delete a file",
 		"Find a file",
 		"Create a Directory",
-		"Open a File",
 	}
 
 	menuOptions, _ := pterm.DefaultInteractiveSelect.WithOptions(selectOptions).Show()
@@ -69,6 +68,11 @@ func main() {
 		path, _ := pterm.DefaultInteractiveTextInput.WithDefaultText("Path").Show()
 
 		fileFunctions.CreateDirectory(path)
+	} else if menuOptions == "Delete a file" {
+		fileName, _ := pterm.DefaultInteractiveTextInput.WithDefaultText("File Name").Show()
+		path, _ := pterm.DefaultInteractiveTextInput.WithDefaultText("Path").Show()
+
+		fileFunctions.DeleteFile(fileName, path)
 	}
 
 	area.Stop()
