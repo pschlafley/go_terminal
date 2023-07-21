@@ -3,7 +3,7 @@ module github.com/pschlafley/go_terminal
 go 1.20
 
 require (
-	github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230718170017-dc32815005fb
+	// github.com/pschlafley/fileFunctions v0.0.1-alpha.0.20230718170017-dc32815005fb
 	github.com/pterm/pterm v0.12.62
 )
 
